@@ -55,7 +55,7 @@ public class PlayerTest {
         player.play(game2, 10);
         player.play(game3, 3);
 
-        String expected = game2.getTitle();
+        Game expected = game2; // исправлен ожидаемый результат
         Game actual = player.mostPlayerByGenre("Симулятор");
         assertEquals(expected, actual);
     }

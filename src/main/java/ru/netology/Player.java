@@ -27,7 +27,15 @@ public class Player {
      */
 
     public void installGame(Game game) {
-        playedTime.put(game, 0);
+        boolean noGame = true;
+        for (Game iGame : playedTime.keySet()) {
+            if (iGame.equals(game)) { // добавлена проверка на отсутствие игры
+                noGame = false;
+            }
+        }
+        if (noGame) {
+            playedTime.put(game, 0);
+        }
     }
 
     /**
@@ -39,9 +47,18 @@ public class Player {
      */
 
     public int play(Game game, int hours) {
+        boolean noGame = true;
+        for (Game iGame : playedTime.keySet()) {
+            if (iGame.equals(game)) {
+                noGame = false;
+            }
+        }
+        if (noGame) {
+            throw new RuntimeException("Игра " + game + "не установлена"); // ошибка на добавление времени неустановленной игре
+        }
         game.getStore().addPlayTime(name, hours);
         if (playedTime.containsKey(game)) {
-            playedTime.put(game, playedTime.get(game));
+            playedTime.put(game, playedTime.get(game) + hours); // время исходное увеличено на hours
         } else {
             playedTime.put(game, hours);
         }
@@ -71,6 +88,16 @@ public class Player {
      */
 
     public Game mostPlayerByGenre(String genre) {
-        return null;
+        Game findGame = null;
+        int max = 0;
+        for (Game game : playedTime.keySet()) {
+            if (game.getGenre().equals(genre)) {
+                if (max < playedTime.get(game)) {
+                    max = playedTime.get(game);
+                    findGame = game;
+                }
+            }
+        }
+        return findGame; // дописан метод поиска игры по жанру с наибольшим временем
     }
 }
