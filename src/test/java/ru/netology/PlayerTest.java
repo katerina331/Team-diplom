@@ -2,6 +2,7 @@ package ru.netology;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
@@ -92,6 +93,16 @@ public class PlayerTest {
             player.play(game3, 3);
 
         });
+    }
+    @Test
+    public void shouldAddPlayerName() {
+
+        Player player = new Player("Kolya");
+
+        String expected = "Kolya";
+        String actual = player.getName();
+
+        Assertions.assertEquals(expected, actual);
     }
 
 }
