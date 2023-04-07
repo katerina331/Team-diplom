@@ -47,20 +47,11 @@ public class Player {
      */
 
     public int play(Game game, int hours) {
-        boolean noGame = true;
-        for (Game iGame : playedTime.keySet()) {
-            if (iGame.equals(game)) {
-                noGame = false;
-            }
-        }
-        if (noGame) {
-            throw new RuntimeException("Игра " + game + "не установлена"); // ошибка на добавление времени неустановленной игре
-        }
         game.getStore().addPlayTime(name, hours);
         if (playedTime.containsKey(game)) {
             playedTime.put(game, playedTime.get(game) + hours); // время исходное увеличено на hours
         } else {
-            playedTime.put(game, hours);
+            throw new RuntimeException("Игра " + game + "не установлена"); // исправлен! ошибка на добавление времени неустановленной игре;
         }
         return playedTime.get(game);
     }
