@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/cf1v7dovj5urt5t5/branch/main?svg=true)](https://ci.appveyor.com/project/katerina331/team-diplom/branch/main)
+
 # Командный проект по курсу «Java для тестировщиков»
 
 * [Цели проекта](#цели-проекта)
